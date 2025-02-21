@@ -98,9 +98,6 @@ data class MarketData(
     @field:SerializedName("current_price")
     val currentPrice: CurrentPrice? = null,
 
-    @field:SerializedName("roi")
-    val roi: RoiResponse? = null,
-
     @field:SerializedName("max_supply_infinite")
     val maxSupplyInfinite: Boolean? = null,
 ) : Parcelable

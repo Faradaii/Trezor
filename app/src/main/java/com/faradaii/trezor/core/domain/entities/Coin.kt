@@ -30,13 +30,5 @@ data class CoinEntity(
     val atl: Double?,
     val atlChangePercentage: Double?,
     val atlDate: String?,
-    val roi: Roi?,
     val lastUpdated: String?,
-) : Parcelable
-
-@Parcelize
-data class Roi(
-    val currency: String?,
-    val times: Double?,
-    val percentage: Double?,
 ) : Parcelable

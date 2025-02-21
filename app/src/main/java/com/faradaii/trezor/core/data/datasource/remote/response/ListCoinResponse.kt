@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class ListCoinResponse(
 
     @field:SerializedName("ListCoinResponse")
-    val listCoinResponse: List<CoinResponseItem?>? = null,
+    val listCoinResponse: List<CoinResponseItem>,
 ) : Parcelable
 
 @Parcelize
@@ -34,9 +34,6 @@ data class CoinResponseItem(
 
     @field:SerializedName("atl_date")
     val atlDate: String? = null,
-
-    @field:SerializedName("roi")
-    val roi: RoiResponse? = null,
 
     @field:SerializedName("market_cap_change_24h")
     val marketCapChange24h: Long? = null,
