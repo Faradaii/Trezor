@@ -1,11 +1,11 @@
 package com.faradaii.trezor.core.common.utils
 
 import com.faradaii.trezor.core.data.datasource.local.model.CoinLocalModel
-import com.faradaii.trezor.core.data.datasource.remote.response.CoinResponse
+import com.faradaii.trezor.core.data.datasource.remote.response.CoinResponseItem
 import com.faradaii.trezor.core.domain.entities.CoinEntity
 
 object DataMapper {
-    fun mapResponsesToLocalModelList(input: List<CoinResponse>): List<CoinLocalModel> =
+    fun mapResponsesToLocalModelList(input: List<CoinResponseItem>): List<CoinLocalModel> =
         input.map {
             mapResponsesToLocalModel(input = it)
         }
@@ -15,26 +15,26 @@ object DataMapper {
             mapLocalModelToEntity(input = it)
         }
 
-    fun mapResponsesToLocalModel(input: CoinResponse): CoinLocalModel = CoinLocalModel(
+    private fun mapResponsesToLocalModel(input: CoinResponseItem): CoinLocalModel = CoinLocalModel(
         id = input.id ?: "",
         symbol = input.symbol ?: "",
         name = input.name ?: "",
-        image = input.image?.large ?: "",
-        currentPrice = input.marketData?.currentPrice?.usd?.toDouble() ?: 0.0,
+        image = input.image,
+        currentPrice = input.currentPrice?.toDouble(),
         marketCap = input.marketCap,
         marketCapRank = input.marketCapRank,
         fullyDilutedValuation = input.fullyDilutedValuation,
         totalVolume = input.totalVolume,
-        high24h = input.high24h,
-        low24h = input.low24h,
+        high24h = input.high24h?.toDouble(),
+        low24h = input.low24h?.toDouble(),
         priceChange24h = input.priceChange24h,
         priceChangePercentage24h = input.priceChangePercentage24h,
         marketCapChange24h = input.marketCapChange24h,
         marketCapChangePercentage24h = input.marketCapChangePercentage24h,
-        circulatingSupply = input.circulatingSupply,
-        totalSupply = input.totalSupply,
-        maxSupply = input.maxSupply,
-        ath = input.ath,
+        circulatingSupply = input.circulatingSupply?.toDouble(),
+        totalSupply = input.totalSupply?.toDouble(),
+        maxSupply = input.maxSupply?.toDouble(),
+        ath = input.ath?.toDouble(),
         athChangePercentage = input.athChangePercentage,
         athDate = input.athDate,
         atl = input.atl,
