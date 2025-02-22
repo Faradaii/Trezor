@@ -30,6 +30,5 @@ data class CoinEntity(
     val atl: Double?,
     val atlChangePercentage: Double?,
     val atlDate: String?,
-    val roi: String?,
-    val lastUpdated: String?
+    val lastUpdated: String?,
 ) : Parcelable

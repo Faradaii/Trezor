@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface CoinRepository {
     fun getAllCoin(): Flow<ResourceState<List<CoinEntity>>>
-    fun getDetailCoin(): Flow<ResourceState<CoinEntity>>
-    fun getFavoriteCoin(): Flow<List<CoinEntity>>
+    fun getDetailCoin(id: String): Flow<ResourceState<CoinEntity>>
+    fun getAllFavoriteCoin(): Flow<List<CoinEntity>>
     fun getFavoriteCoinById(id: String): Flow<CoinEntity>
     fun setFavoriteCoin(coin: CoinEntity, state: Boolean)
 }
