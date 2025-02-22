@@ -8,20 +8,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ApiConfig {
-    private fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(apiInterceptor: ApiInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .addInterceptor(ApiInterceptor())
+            .addInterceptor(apiInterceptor)
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(200, TimeUnit.SECONDS)
             .build()
     }
 
-    fun provideApiService(): ApiService {
+    fun provideApiService(okHttpClient: OkHttpClient): ApiService {
         val retrofit = Retrofit.Builder()
             .baseUrl(Constant.API_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(provideOkHttpClient())
+            .client(okHttpClient)
             .build()
         return retrofit.create(ApiService::class.java)
     }
