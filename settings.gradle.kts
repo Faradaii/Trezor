@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Trezor"
 include(":app")
+include(":favorite")
+include(":core")
