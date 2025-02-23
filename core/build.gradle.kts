@@ -41,12 +41,14 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     api(libs.koin.android)
+    api(libs.material)
+    api(libs.androidx.recyclerview)
+    api(libs.glide)
 
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
@@ -56,6 +58,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
 
     ksp(libs.androidx.room.compiler)
 }

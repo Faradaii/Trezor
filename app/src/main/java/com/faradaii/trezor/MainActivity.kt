@@ -1,5 +1,7 @@
 package com.faradaii.trezor
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -8,9 +10,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.faradaii.trezor.databinding.ActivityMainBinding
-import com.faradaii.trezor.favorite.FavoriteFragment
 import com.faradaii.trezor.home.HomeFragment
-import com.faradaii.trezor.setting.SettingFragment
+import com.faradaii.trezor.setting.SettingActivity
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -23,13 +24,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.appBar.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
 
         drawerLayout = binding.drawerLayout
 
         val toggle = ActionBarDrawerToggle(
             this,
             drawerLayout,
-            binding.toolbar,
+            binding.appBar.toolbar,
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close
         )
@@ -48,6 +53,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        super.onOptionsItemSelected(item)
         var fragment: Fragment? = null
         var title = getString(R.string.app_name)
         when (item.itemId) {
@@ -57,13 +63,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
 
             R.id.nav_setting -> {
-                fragment = SettingFragment()
-                title = getString(R.string.menu_setting)
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.nav_favorite -> {
-                fragment = FavoriteFragment()
-                title = getString(R.string.menu_favorite)
+                val uri = Uri.parse("trezor://favorite")
+                startActivity(Intent(Intent.ACTION_VIEW, uri))
             }
         }
         if (fragment != null) {
@@ -72,7 +78,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 .commit()
         }
         supportActionBar?.title = title
-
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
