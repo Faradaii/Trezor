@@ -2,7 +2,6 @@ package com.faradaii.trezor.core.data.datasource.remote
 
 import com.faradaii.trezor.core.data.datasource.remote.network.ApiResponse
 import com.faradaii.trezor.core.data.datasource.remote.network.ApiService
-import com.faradaii.trezor.core.data.datasource.remote.response.CoinResponse
 import com.faradaii.trezor.core.data.datasource.remote.response.CoinResponseItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -26,14 +25,4 @@ class RemoteDataSource(private val apiService: ApiService) {
         }.flowOn(Dispatchers.IO)
     }
 
-    fun getDetailCoin(id: String): Flow<ApiResponse<CoinResponse>> {
-        return flow {
-            try {
-                val response = apiService.getCoin(id = id)
-                emit(ApiResponse.Success(response))
-            } catch (e: Exception) {
-                emit(ApiResponse.Error(e.toString()))
-            }
-        }.flowOn(Dispatchers.IO)
-    }
 }

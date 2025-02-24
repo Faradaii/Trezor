@@ -1,0 +1,1 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/Faradaii/Trezor/tree/main.svg?style=svg&circle-token=CCIPRJ_QQvYfkwzXFbNExFbjG3Pwt_f0461cf594d96af21cde17884cc7962701e04deb)](https://dl.circleci.com/status-badge/redirect/gh/Faradaii/Trezor/tree/main)

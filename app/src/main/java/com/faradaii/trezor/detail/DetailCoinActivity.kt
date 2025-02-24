@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.IntentCompat.getParcelableExtra
-import com.bumptech.glide.Glide
 import com.faradaii.trezor.R
 import com.faradaii.trezor.core.common.utils.DateFormatter
+import com.faradaii.trezor.core.common.utils.loadImage
 import com.faradaii.trezor.core.domain.entities.CoinEntity
 import com.faradaii.trezor.databinding.ActivityDetailCoinBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,44 +34,36 @@ class DetailCoinActivity : AppCompatActivity() {
         detailCoin?.let {
             supportActionBar?.title = detailCoin.name
 
-            Glide.with(binding.root)
-                .load(detailCoin.image)
-                .into(binding.ivCoinLogo)
-            binding.content.tvDetailName?.text = detailCoin.name
-            binding.content.tvDetailSymbol?.text = detailCoin.symbol
-            binding.content.tvDetailCurrentPrice?.text =
-                getString(coreR.string.currency, detailCoin.currentPrice.toString())
-            binding.content.tvDetailTotalSupply?.text = detailCoin.totalSupply.toString()
-            binding.content.tvDetailLastUpdate?.text =
-                DateFormatter.formatIsoDate(detailCoin.lastUpdated ?: "")
-            binding.content.tvDetailTotalVolume?.text = detailCoin.totalVolume.toString()
-
             var statusFavorite = detailCoin.isFavorite
             setStatusFavorite(statusFavorite)
-            binding.fab.setOnClickListener {
-                statusFavorite = !statusFavorite
-                detailCoinViewModel.setFavoriteCoin(detailCoin, statusFavorite)
-                setStatusFavorite(statusFavorite)
+
+            binding.apply {
+                content.tvDetailName?.text = detailCoin.name
+                content.tvDetailSymbol?.text = detailCoin.symbol
+                content.tvDetailCurrentPrice?.text =
+                    getString(coreR.string.currency, detailCoin.currentPrice.toString())
+                content.tvDetailTotalSupply?.text = detailCoin.totalSupply.toString()
+                content.tvDetailLastUpdate?.text =
+                    DateFormatter.formatIsoDate(detailCoin.lastUpdated ?: "")
+                content.tvDetailTotalVolume?.text = detailCoin.totalVolume.toString()
+                ivCoinLogo.loadImage(url = detailCoin.image)
+
+                fab.setOnClickListener {
+                    statusFavorite = !statusFavorite
+                    detailCoinViewModel.setFavoriteCoin(detailCoin, statusFavorite)
+                    setStatusFavorite(statusFavorite)
+                }
             }
         }
     }
 
     private fun setStatusFavorite(statusFavorite: Boolean) {
-        if (statusFavorite) {
-            binding.fab.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.ic_bookmark_white
-                )
+        binding.fab.setImageDrawable(
+            ContextCompat.getDrawable(
+                this,
+                if (statusFavorite) R.drawable.ic_bookmark_white else R.drawable.ic_not_bookmark_white
             )
-        } else {
-            binding.fab.setImageDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    R.drawable.ic_not_bookmark_white
-                )
-            )
-        }
+        )
     }
 
     companion object {

@@ -30,7 +30,6 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
                 is ApiResponse.Error -> {
                     print("ERROR API ERROR, ${apiResponse.errorMessage}")
-                    onFetchFailed()
                     emit(ResourceState.Error(apiResponse.errorMessage))
                 }
             }
@@ -38,8 +37,6 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
             emitAll(loadFromDB().map { ResourceState.Success(it) })
         }
     }
-
-    protected open fun onFetchFailed() {}
 
     protected abstract fun loadFromDB(): Flow<ResultType>
 

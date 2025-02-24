@@ -22,9 +22,8 @@ class SettingFragment : PreferenceFragmentCompat() {
         }
     }
 
-    private fun updateTheme(mode: Int): Boolean {
+    private fun updateTheme(mode: Int) {
         AppCompatDelegate.setDefaultNightMode(mode)
         requireActivity().recreate()
-        return true
     }
 }

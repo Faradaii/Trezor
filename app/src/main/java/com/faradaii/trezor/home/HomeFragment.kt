@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.faradaii.trezor.R
 import com.faradaii.trezor.core.common.utils.ResourceState
 import com.faradaii.trezor.core.presentation.ui.CoinAdapter
 import com.faradaii.trezor.databinding.FragmentHomeBinding
@@ -52,7 +53,7 @@ class HomeFragment : Fragment() {
                         is ResourceState.Error -> {
                             binding.progressBar.visibility = View.GONE
                             binding.tvError.text =
-                                coin.message ?: "Error"
+                                coin.message ?: getString(R.string.something_went_wrong)
                         }
                     }
                 }
