@@ -38,7 +38,6 @@ class CoinRepositoryImpl(
 
             override fun shouldFetch(data: List<CoinEntity>?): Boolean =
                 data?.isEmpty() ?: true
-//                true
         }.asFlow()
 
     override fun getDetailCoin(id: String): Flow<ResourceState<CoinEntity>> {
