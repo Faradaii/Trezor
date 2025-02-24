@@ -12,6 +12,8 @@ import com.faradaii.trezor.core.data.datasource.remote.network.ApiInterceptor
 import com.faradaii.trezor.core.data.datasource.remote.network.ApiService
 import com.faradaii.trezor.core.data.repository.CoinRepositoryImpl
 import com.faradaii.trezor.core.domain.repository.CoinRepository
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -20,10 +22,15 @@ import org.koin.dsl.module
 val databaseModule = module {
     factory { get<CoinDatabase>().coinDao() }
     single {
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("faradaii".toCharArray())
+        val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),
             CoinDatabase::class.java, Constant.DATABASE_NAME
-        ).fallbackToDestructiveMigration().build()
+        )
+            .fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
+            .build()
     }
 }
 

@@ -1,0 +1,1 @@
+[![faradaii](https://circleci.com/gh/Faradaii/Trezor.svg?style=svg)](https://circleci.com/gh/Faradaii/Trezor)
