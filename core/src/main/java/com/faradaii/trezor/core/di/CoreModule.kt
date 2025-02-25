@@ -18,9 +18,7 @@ import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-
 val databaseModule = module {
-    factory { get<CoinDatabase>().coinDao() }
     single {
         val passphrase: ByteArray = SQLiteDatabase.getBytes("faradaii".toCharArray())
         val factory = SupportFactory(passphrase)
@@ -32,6 +30,7 @@ val databaseModule = module {
             .openHelperFactory(factory)
             .build()
     }
+    factory { get<CoinDatabase>().coinDao() }
 }
 
 val networkModule = module {
