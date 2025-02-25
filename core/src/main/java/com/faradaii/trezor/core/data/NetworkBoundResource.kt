@@ -18,18 +18,15 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
             when (val apiResponse = createCall().first()) {
                 is ApiResponse.Success -> {
-                    print("SAVE CALL API SUCCESS")
                     saveCallResult(apiResponse.data)
                     emitAll(loadFromDB().map { ResourceState.Success(it) })
                 }
 
                 is ApiResponse.Empty -> {
-                    print("LOAD DB API EMPTY")
                     emitAll(loadFromDB().map { ResourceState.Success(it) })
                 }
 
                 is ApiResponse.Error -> {
-                    print("ERROR API ERROR, ${apiResponse.errorMessage}")
                     emit(ResourceState.Error(apiResponse.errorMessage))
                 }
             }

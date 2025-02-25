@@ -12,6 +12,7 @@ import com.faradaii.trezor.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import java.util.Locale
 
 class MyApp : Application() {
@@ -20,6 +21,7 @@ class MyApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MyApp)
+            androidLogger(Level.DEBUG)
             modules(
                 listOf(
                     databaseModule,
