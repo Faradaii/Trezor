@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="symbol">symbol</string>
+    <string name="name">Name</string>
+    <string name="current_price">22.000.000</string>
+    <string name="iv_logo_desc">logo</string>
+    <string name="currency">USD %1$s</string>
+</resources>

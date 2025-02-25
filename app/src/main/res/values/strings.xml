@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">Trezor</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="menu_favorite">Favorite</string>
+    <string name="menu_setting">Setting</string>
+    <string name="menu_home">Home</string>
+    <string name="pref_dark_follow_system">follow_system</string>
+    <string name="pref_key_dark">key_dark_mode</string>
+    <string name="pref_dark_title">Dark Mode</string>
+    <string name="dark_mode_auto">Automatic</string>
+    <string name="dark_mode_on">Dark</string>
+    <string name="dark_mode_off">Light</string>
+    <string name="pref_dark_on">on</string>
+    <string name="pref_dark_off">off</string>
+    <string name="something_went_wrong">Something Went Wrong</string>
+    <string name="empty_favorites">Empty, try add favorite!</string>
+    <string name="title_activity_detail_coin">DetailCoinActivity</string>
+    <string name="large_text">Large Text</string>
+    <string name="textview">Textview</string>
+    <string name="coin_name">Coin Name</string>
+    <string name="coin_symbol">Coin Symbol</string>
+    <string name="current_price">Current Price</string>
+    <string name="total_supply">Total Supply</string>
+    <string name="last_updated">Last Updated</string>
+    <string name="total_volume">Total Volume</string>
+    <string name="nav_header_image">Nav header image</string>
+    <string name="fab_favorite">fab favorite</string>
+    <string name="detail_coin_logo">detail coin logo</string>
 </resources>
